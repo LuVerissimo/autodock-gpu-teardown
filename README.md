@@ -169,19 +169,23 @@ always byte-identical.
 ## Reproduce
 
 **Code changes.** [`patches/`](patches/) holds plain diffs against upstream AutoDock-GPU `develop` at `be06a135`.
-Each was checked with `git apply --check` on a clean checkout. Applying fix #1 then fix #2 reproduces the measured
-fix #1 + #2 sources exactly.
+Fix #1 and the ceiling diff were each checked with `git apply --check` on a clean checkout. Fix #2 was checked on
+top of fix #1, which it requires. Applying fix #1 then fix #2 reproduces the measured fix #1 + #2 sources exactly.
 
 ```bash
 git clone https://github.com/forlilab/AutoDock-GPU.git && cd AutoDock-GPU && git checkout be06a135
 git submodule update --init wmma_extension                       # needed for TENSOR=ON
 git apply ../autodock-gpu-teardown/patches/fix1-intra-segmented-atomics.diff                     # fix #1
 make DEVICE=CUDA NUMWI=128 TARGETS=80 TENSOR=ON                  # fix #1 build (as measured)
+cp bin/autodock_gpu_128wi ../autodock_gpu_128wi_fix1             # keep the fix #1 binary
+rm -f kernels.o bin/autodock_gpu_128wi bin/adgpu_analysis        # clean: upstream's Makefile has no clean recipe
 git apply ../autodock-gpu-teardown/patches/fix2-shfl-block-reduction.diff                        # + fix #2
 make DEVICE=CUDA NUMWI=128 TARGETS=80 SHFLREDUCE=ON              # fix #1 + #2 build (as measured)
 ```
 
 - The baseline is the unpatched checkout built with `TENSOR=ON`.
+- Each build writes `bin/autodock_gpu_128wi`; copy it out before building the next variant, and clean between
+  variants as above.
 - Fix #2 alone is the fix #1 + #2 tree built with `make ... SHFLREDUCE=ON "NVCC=nvcc -DINTRA_ATOMICS_LEGACY"`.
 - The ceiling diff applies to a clean checkout and produces wrong docking results by design.
 
