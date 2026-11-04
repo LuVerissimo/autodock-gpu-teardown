@@ -1,0 +1,200 @@
+== gpu_gen_and_eval_newpops_kernel(float *, float *, float *, float *)  (ID 0) file=3ce3_cuda_gpu_gen_and_eval_newpops_kernel_raw.csv
+   duration_us            317.728000
+   sm_throughput_%        32.759095
+   dram_throughput_%      2.042137
+   l2_throughput_%        32.773145
+   l1tex_throughput_%     45.142754
+   achieved_occupancy_%   60.357512
+   theoretical_occ_%      62.500000
+   registers/thread       48 register/thread
+   occ_limit_registers    10.000000 block
+   occ_limit_smem         21.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      3.672000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     44867
+   smem_st_bank_confl     46662
+   local_ld_sectors       0 sector
+   issue_active_%         33.279489
+   top stalls (cycles/issued inst): long_scoreboard=9.10, barrier=6.98, membar=5.65, wait=2.53, short_scoreboard=1.06, selected=1.00
+== gpu_gen_and_eval_newpops_kernel(float *, float *, float *, float *)  (ID 1) file=3ce3_cuda_gpu_gen_and_eval_newpops_kernel_raw.csv
+   duration_us            317.216000
+   sm_throughput_%        32.816408
+   dram_throughput_%      2.029169
+   l2_throughput_%        32.897141
+   l1tex_throughput_%     45.240664
+   achieved_occupancy_%   60.418433
+   theoretical_occ_%      62.500000
+   registers/thread       48 register/thread
+   occ_limit_registers    10.000000 block
+   occ_limit_smem         21.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      3.672000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     44863
+   smem_st_bank_confl     46707
+   local_ld_sectors       0 sector
+   issue_active_%         33.340408
+   top stalls (cycles/issued inst): long_scoreboard=9.11, barrier=6.99, membar=5.65, wait=2.53, short_scoreboard=1.06, selected=1.00
+== gpu_gradient_minAD_kernel(float *, float *)  (ID 0) file=3ce3_cuda_gpu_gradient_minAD_kernel_raw.csv
+   duration_us            23288.9
+   sm_throughput_%        27.379465
+   dram_throughput_%      0.030887
+   l2_throughput_%        14.736756
+   l1tex_throughput_%     57.408556
+   achieved_occupancy_%   46.744711
+   theoretical_occ_%      50.000000
+   registers/thread       64 register/thread
+   occ_limit_registers    8.000000 block
+   occ_limit_smem         11.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      7.428000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     1637708
+   smem_st_bank_confl     1697219
+   local_ld_sectors       0 sector
+   issue_active_%         32.531780
+   top stalls (cycles/issued inst): barrier=6.43, membar=5.04, long_scoreboard=4.41, wait=2.24, short_scoreboard=1.44, selected=1.00
+== gpu_gradient_minAD_kernel(float *, float *)  (ID 1) file=3ce3_cuda_gpu_gradient_minAD_kernel_raw.csv
+   duration_us            22689.5
+   sm_throughput_%        27.727724
+   dram_throughput_%      0.031372
+   l2_throughput_%        14.963384
+   l1tex_throughput_%     57.716466
+   achieved_occupancy_%   47.086721
+   theoretical_occ_%      50.000000
+   registers/thread       64 register/thread
+   occ_limit_registers    8.000000 block
+   occ_limit_smem         11.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      7.428000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     1616166
+   smem_st_bank_confl     1671950
+   local_ld_sectors       0 sector
+   issue_active_%         32.668147
+   top stalls (cycles/issued inst): barrier=6.44, membar=5.06, long_scoreboard=4.42, wait=2.24, short_scoreboard=1.45, selected=1.00
+== gpu_gradient_minAD_kernel(float *, float *)  (ID 0) file=3ce3_cuda_tensor_gpu_gradient_minAD_kernel_raw.csv
+   duration_us            16068.7
+   sm_throughput_%        40.605436
+   dram_throughput_%      0.045026
+   l2_throughput_%        2.959868
+   l1tex_throughput_%     76.742650
+   achieved_occupancy_%   47.207436
+   theoretical_occ_%      50.000000
+   registers/thread       64 register/thread
+   occ_limit_registers    8.000000 block
+   occ_limit_smem         8.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      10.496000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     53761272
+   smem_st_bank_confl     73416884
+   local_ld_sectors       0 sector
+   issue_active_%         47.907878
+   top stalls (cycles/issued inst): barrier=7.30, wait=1.96, long_scoreboard=1.27, mio_throttle=1.05, selected=1.00, short_scoreboard=0.86
+== gpu_gradient_minAD_kernel(float *, float *)  (ID 1) file=3ce3_cuda_tensor_gpu_gradient_minAD_kernel_raw.csv
+   duration_us            15691.4
+   sm_throughput_%        41.417874
+   dram_throughput_%      0.045907
+   l2_throughput_%        3.033007
+   l1tex_throughput_%     76.652589
+   achieved_occupancy_%   47.179929
+   theoretical_occ_%      50.000000
+   registers/thread       64 register/thread
+   occ_limit_registers    8.000000 block
+   occ_limit_smem         8.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      10.496000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     53560921
+   smem_st_bank_confl     73144104
+   local_ld_sectors       0 sector
+   issue_active_%         47.881590
+   top stalls (cycles/issued inst): barrier=7.31, wait=1.96, long_scoreboard=1.27, mio_throttle=1.05, selected=1.00, short_scoreboard=0.86
+== gpu_gradient_minAD_kernel(float *, float *)  (ID 0) file=7cpa_cuda_gpu_gradient_minAD_kernel_raw.csv
+   duration_us            99007.7
+   sm_throughput_%        33.973213
+   dram_throughput_%      0.022143
+   l2_throughput_%        20.723191
+   l1tex_throughput_%     65.918370
+   achieved_occupancy_%   48.130546
+   theoretical_occ_%      50.000000
+   registers/thread       64 register/thread
+   occ_limit_registers    8.000000 block
+   occ_limit_smem         11.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      7.428000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     139081900
+   smem_st_bank_confl     22536756
+   local_ld_sectors       0 sector
+   issue_active_%         35.469957
+   top stalls (cycles/issued inst): long_scoreboard=5.34, barrier=5.25, membar=3.48, wait=2.16, mio_throttle=1.32, short_scoreboard=1.28
+== gpu_gradient_minAD_kernel(float *, float *)  (ID 1) file=7cpa_cuda_gpu_gradient_minAD_kernel_raw.csv
+   duration_us            99133.6
+   sm_throughput_%        34.367245
+   dram_throughput_%      0.021807
+   l2_throughput_%        21.001571
+   l1tex_throughput_%     65.944173
+   achieved_occupancy_%   48.121744
+   theoretical_occ_%      50.000000
+   registers/thread       64 register/thread
+   occ_limit_registers    8.000000 block
+   occ_limit_smem         11.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      7.428000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     140864647
+   smem_st_bank_confl     22828342
+   local_ld_sectors       0 sector
+   issue_active_%         35.429700
+   top stalls (cycles/issued inst): long_scoreboard=5.33, barrier=5.25, membar=3.48, wait=2.16, mio_throttle=1.32, short_scoreboard=1.28
+== gpu_gradient_minAD_kernel(float *, float *)  (ID 0) file=7cpa_cuda_tensor_gpu_gradient_minAD_kernel_raw.csv
+   duration_us            76525.2
+   sm_throughput_%        45.120512
+   dram_throughput_%      0.028817
+   l2_throughput_%        5.032862
+   l1tex_throughput_%     82.112302
+   achieved_occupancy_%   48.218729
+   theoretical_occ_%      50.000000
+   registers/thread       64 register/thread
+   occ_limit_registers    8.000000 block
+   occ_limit_smem         8.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      10.496000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     321125614
+   smem_st_bank_confl     271139312
+   local_ld_sectors       0 sector
+   issue_active_%         46.574529
+   top stalls (cycles/issued inst): barrier=6.33, wait=2.00, long_scoreboard=1.97, mio_throttle=1.67, selected=1.00, not_selected=0.98
+== gpu_gradient_minAD_kernel(float *, float *)  (ID 1) file=7cpa_cuda_tensor_gpu_gradient_minAD_kernel_raw.csv
+   duration_us            78069.5
+   sm_throughput_%        45.451888
+   dram_throughput_%      0.027545
+   l2_throughput_%        5.078079
+   l1tex_throughput_%     82.121243
+   achieved_occupancy_%   48.200916
+   theoretical_occ_%      50.000000
+   registers/thread       64 register/thread
+   occ_limit_registers    8.000000 block
+   occ_limit_smem         8.000000 block
+   dyn_smem/block         0 byte/block
+   static_smem/block      10.496000 Kbyte/block
+   block_size             128
+   grid_size              15000
+   smem_ld_bank_confl     330012148
+   smem_st_bank_confl     278614799
+   local_ld_sectors       0 sector
+   issue_active_%         46.592687
+   top stalls (cycles/issued inst): barrier=6.33, wait=2.00, long_scoreboard=1.97, mio_throttle=1.67, selected=1.00, not_selected=0.98

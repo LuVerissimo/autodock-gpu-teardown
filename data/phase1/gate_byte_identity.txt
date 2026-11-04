@@ -1,0 +1,226 @@
+=== PRIMARY GATE: fix1_tensor vs base_tensor (seeds 42 7 123)
+DIFFERENT  1stp_base_tensor_s123_r1.dlg vs 1stp_fix1_tensor_s123_r1.dlg: 158 differing lines, line counts 6844/6844
+    line 71:
+      a: Number of energy evaluations performed:    245461
+      b: Number of energy evaluations performed:    245397
+    line 2768:
+      a: DOCKED: USER    Estimated Free Energy of Binding    =  -6.78 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    =  -6.67 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 2770:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     =  -8.28 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     =  -8.17 kcal/mol
+    line 2771:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -7.84 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -7.69 kcal/mol
+    line 2772:
+      a: DOCKED: USER        Electrostatic Energy            =  -0.44 kcal/mol
+      b: DOCKED: USER        Electrostatic Energy            =  -0.47 kcal/mol
+DIFFERENT  1stp_base_tensor_s42_r1.dlg vs 1stp_fix1_tensor_s42_r1.dlg: 117 differing lines, line counts 6844/6844
+    line 71:
+      a: Number of energy evaluations performed:    184645
+      b: Number of energy evaluations performed:    184635
+    line 2702:
+      a: DOCKED: USER    Estimated Free Energy of Binding    =  -7.56 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    =  -7.79 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 2704:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.05 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.28 kcal/mol
+    line 2705:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.35 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.62 kcal/mol
+    line 2706:
+      a: DOCKED: USER        Electrostatic Energy            =  -0.69 kcal/mol
+      b: DOCKED: USER        Electrostatic Energy            =  -0.66 kcal/mol
+DIFFERENT  1stp_base_tensor_s7_r1.dlg vs 1stp_fix1_tensor_s7_r1.dlg: 183 differing lines, line counts 6844/6844
+    line 71:
+      a: Number of energy evaluations performed:    245377
+      b: Number of energy evaluations performed:    245271
+    line 590:
+      a: DOCKED: USER    Estimated Free Energy of Binding    =  -7.95 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    =  -5.96 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 592:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.44 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     =  -7.45 kcal/mol
+    line 593:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.71 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -7.14 kcal/mol
+    line 594:
+      a: DOCKED: USER        Electrostatic Energy            =  -0.73 kcal/mol
+      b: DOCKED: USER        Electrostatic Energy            =  -0.31 kcal/mol
+DIFFERENT  3ce3_base_tensor_s123_r1.dlg vs 3ce3_fix1_tensor_s123_r1.dlg: 603 differing lines, line counts 8864/8864
+    line 71:
+      a: Number of energy evaluations performed:    250955
+      b: Number of energy evaluations performed:    251031
+    line 1612:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     = -12.66 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     = -12.65 kcal/mol
+    line 1613:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     = -12.49 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     = -12.48 kcal/mol
+    line 1615:
+      a: DOCKED: USER        Moving Ligand-Fixed Receptor    = -12.66 kcal/mol
+      b: DOCKED: USER        Moving Ligand-Fixed Receptor    = -12.65 kcal/mol
+    line 1633:
+      a: DOCKED: HETATM    1  C13 1FN A1401      19.629  15.110  58.204 -0.33 +0.04    +0.152 A  
+      b: DOCKED: HETATM    1  C13 1FN A1401      19.612  15.092  58.153 -0.33 +0.04    +0.152 A  
+DIFFERENT  3ce3_base_tensor_s42_r1.dlg vs 3ce3_fix1_tensor_s42_r1.dlg: 732 differing lines, line counts 8864/8864
+    line 71:
+      a: Number of energy evaluations performed:    248349
+      b: Number of energy evaluations performed:    248340
+    line 922:
+      a: DOCKED: USER    Estimated Free Energy of Binding    = -11.41 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    = -11.48 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 924:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     = -12.90 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     = -12.97 kcal/mol
+    line 925:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     = -12.68 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     = -12.73 kcal/mol
+    line 926:
+      a: DOCKED: USER        Electrostatic Energy            =  -0.22 kcal/mol
+      b: DOCKED: USER        Electrostatic Energy            =  -0.25 kcal/mol
+DIFFERENT  3ce3_base_tensor_s7_r1.dlg vs 3ce3_fix1_tensor_s7_r1.dlg: 495 differing lines, line counts 8864/8864
+    line 71:
+      a: Number of energy evaluations performed:    252137
+      b: Number of energy evaluations performed:    252054
+    line 406:
+      a: DOCKED: USER    Estimated Free Energy of Binding    = -11.47 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    = -11.52 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 408:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     = -12.96 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     = -13.01 kcal/mol
+    line 409:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     = -12.75 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     = -12.77 kcal/mol
+    line 410:
+      a: DOCKED: USER        Electrostatic Energy            =  -0.21 kcal/mol
+      b: DOCKED: USER        Electrostatic Energy            =  -0.24 kcal/mol
+DIFFERENT  3tmn_base_tensor_s123_r1.dlg vs 3tmn_fix1_tensor_s123_r1.dlg: 53 differing lines, line counts 6240/6240
+    line 71:
+      a: Number of energy evaluations performed:    256926
+      b: Number of energy evaluations performed:    256807
+    line 1082:
+      a: DOCKED: USER    Estimated Free Energy of Binding    =  -9.15 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    =  -9.17 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 1084:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.45 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.47 kcal/mol
+    line 1085:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.03 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.05 kcal/mol
+    line 1087:
+      a: DOCKED: USER        Moving Ligand-Fixed Receptor    =  -9.45 kcal/mol
+      b: DOCKED: USER        Moving Ligand-Fixed Receptor    =  -9.47 kcal/mol
+DIFFERENT  3tmn_base_tensor_s42_r1.dlg vs 3tmn_fix1_tensor_s42_r1.dlg: 159 differing lines, line counts 6242/6242
+    line 71:
+      a: Number of energy evaluations performed:    259448
+      b: Number of energy evaluations performed:    259426
+    line 362:
+      a: DOCKED: USER    Estimated Free Energy of Binding    =  -8.99 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    =  -9.13 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 364:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.29 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.43 kcal/mol
+    line 365:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -7.89 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.00 kcal/mol
+    line 366:
+      a: DOCKED: USER        Electrostatic Energy            =  -1.39 kcal/mol
+      b: DOCKED: USER        Electrostatic Energy            =  -1.43 kcal/mol
+DIFFERENT  3tmn_base_tensor_s7_r1.dlg vs 3tmn_fix1_tensor_s7_r1.dlg: 181 differing lines, line counts 6240/6240
+    line 71:
+      a: Number of energy evaluations performed:    257941
+      b: Number of energy evaluations performed:    257868
+    line 1742:
+      a: DOCKED: USER    Estimated Free Energy of Binding    =  -9.23 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    =  -9.16 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 1744:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.53 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.45 kcal/mol
+    line 1745:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.15 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.03 kcal/mol
+    line 1746:
+      a: DOCKED: USER        Electrostatic Energy            =  -1.38 kcal/mol
+      b: DOCKED: USER        Electrostatic Energy            =  -1.42 kcal/mol
+DIFFERENT  7cpa_base_tensor_s123_r1.dlg vs 7cpa_fix1_tensor_s123_r1.dlg: 5130 differing lines, line counts 12718/12721
+    line 71:
+      a: Number of energy evaluations performed:    1930579
+      b: Number of energy evaluations performed:    2005888
+    line 72:
+      a: Number of generations used:                85
+      b: Number of generations used:                88
+    line 186:
+      a: DOCKED: USER    Estimated Free Energy of Binding    = -11.77 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    = -10.52 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 188:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     = -16.25 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     = -14.99 kcal/mol
+    line 189:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -9.22 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -7.93 kcal/mol
+DIFFERENT  7cpa_base_tensor_s42_r1.dlg vs 7cpa_fix1_tensor_s42_r1.dlg: 5128 differing lines, line counts 12718/12721
+    line 71:
+      a: Number of energy evaluations performed:    1983426
+      b: Number of energy evaluations performed:    1987694
+    line 186:
+      a: DOCKED: USER    Estimated Free Energy of Binding    = -10.85 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    = -11.92 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 188:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     = -15.32 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     = -16.40 kcal/mol
+    line 189:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -9.25 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -9.58 kcal/mol
+    line 190:
+      a: DOCKED: USER        Electrostatic Energy            =  -6.07 kcal/mol
+      b: DOCKED: USER        Electrostatic Energy            =  -6.82 kcal/mol
+DIFFERENT  7cpa_base_tensor_s7_r1.dlg vs 7cpa_fix1_tensor_s7_r1.dlg: 5124 differing lines, line counts 12721/12717
+    line 71:
+      a: Number of energy evaluations performed:    1990140
+      b: Number of energy evaluations performed:    2001968
+    line 72:
+      a: Number of generations used:                87
+      b: Number of generations used:                88
+    line 186:
+      a: DOCKED: USER    Estimated Free Energy of Binding    = -10.38 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    = -11.71 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 188:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     = -14.85 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     = -16.18 kcal/mol
+    line 189:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -7.89 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -9.35 kcal/mol
+
+SUMMARY: 0/12 identical, 12 different, 0 unpaired
+
+=== DETERMINISM: fix12_shfl run a vs run b (seed 42)
+IDENTICAL  1stp_fix12_shfl_s42_r1.dlg == 1stp_fix12_shfl_s42_r1.dlg  (6844 lines compared)
+IDENTICAL  3ce3_fix12_shfl_s42_r1.dlg == 3ce3_fix12_shfl_s42_r1.dlg  (8864 lines compared)
+IDENTICAL  3tmn_fix12_shfl_s42_r1.dlg == 3tmn_fix12_shfl_s42_r1.dlg  (6240 lines compared)
+IDENTICAL  7cpa_fix12_shfl_s42_r1.dlg == 7cpa_fix12_shfl_s42_r1.dlg  (12721 lines compared)
+
+SUMMARY: 4/4 identical, 0 different, 0 unpaired
+
+=== DETERMINISM: fix2only_shfl run a vs run b (seed 42)
+DIFFERENT  1stp_fix2only_shfl_s42_r1.dlg vs 1stp_fix2only_shfl_s42_r1.dlg: 89 differing lines, line counts 6844/6844
+    line 71:
+      a: Number of energy evaluations performed:    245054
+      b: Number of energy evaluations performed:    245129
+    line 2702:
+      a: DOCKED: USER    Estimated Free Energy of Binding    =  -7.11 kcal/mol  [=(1)+(2)+(3)-(4)]
+      b: DOCKED: USER    Estimated Free Energy of Binding    =  -8.13 kcal/mol  [=(1)+(2)+(3)-(4)]
+    line 2704:
+      a: DOCKED: USER    (1) Final Intermolecular Energy     =  -8.61 kcal/mol
+      b: DOCKED: USER    (1) Final Intermolecular Energy     =  -9.62 kcal/mol
+    line 2705:
+      a: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.11 kcal/mol
+      b: DOCKED: USER        vdW + Hbond + desolv Energy     =  -8.87 kcal/mol
+    line 2706:
+      a: DOCKED: USER        Electrostatic Energy            =  -0.49 kcal/mol
+      b: DOCKED: USER        Electrostatic Energy            =  -0.75 kcal/mol
+IDENTICAL  3ce3_fix2only_shfl_s42_r1.dlg == 3ce3_fix2only_shfl_s42_r1.dlg  (8864 lines compared)
+IDENTICAL  3tmn_fix2only_shfl_s42_r1.dlg == 3tmn_fix2only_shfl_s42_r1.dlg  (6240 lines compared)
+IDENTICAL  7cpa_fix2only_shfl_s42_r1.dlg == 7cpa_fix2only_shfl_s42_r1.dlg  (12722 lines compared)
+
+SUMMARY: 3/4 identical, 1 different, 0 unpaired

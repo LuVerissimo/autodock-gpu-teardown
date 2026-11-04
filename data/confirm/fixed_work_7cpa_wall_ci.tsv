@@ -1,0 +1,7 @@
+case 7cpa, metric: s per Meval (wall); speedup = median(ref)/median(variant), 95% bootstrap CI (10000 resamples)
+variant	n	median	min	max	speedup	CI95_lo	CI95_hi
+base_tensor	10	3.3864	3.3829	3.4215	1.000	0.999	1.001
+ceiling_tensor	10	2.9358	2.9311	2.9406	1.153	1.152	1.154
+fix12_shfl	10	2.9728	2.9685	2.9758	1.139	1.138	1.140
+fix1_tensor	10	3.1982	3.1952	3.2032	1.059	1.058	1.060
+fix2only_shfl	10	3.2251	3.2205	3.2466	1.050	1.048	1.051

@@ -1,0 +1,7 @@
+case 7cpa, metric: ms gpu_gradient_minAD_kernel per Meval; speedup = median(ref)/median(variant), 95% bootstrap CI (10000 resamples)
+variant	n	median	min	max	speedup	CI95_lo	CI95_hi
+base_tensor	10	3125.2671	3119.2348	3129.4930	1.000	0.998	1.002
+ceiling_tensor	10	2628.6147	2621.8651	2633.7943	1.189	1.187	1.192
+fix12_shfl	10	2714.3615	2708.9839	2719.1579	1.151	1.149	1.153
+fix1_tensor	10	2942.0422	2934.6691	2945.7230	1.062	1.061	1.064
+fix2only_shfl	10	2968.2368	2961.8732	2973.4458	1.053	1.051	1.055

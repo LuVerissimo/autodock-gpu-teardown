@@ -1,0 +1,125 @@
+diff --git a/Makefile.Cuda b/Makefile.Cuda
+index d6c8901..1c903e1 100644
+--- a/Makefile.Cuda
++++ b/Makefile.Cuda
+@@ -23,6 +23,15 @@ ifeq ($(TENSOR), ON)
+ 	TARGETS = 80
+ endif
+ 
++# [Lu Verissimo 2026-11-04] SHFLREDUCE=ON: deterministic warp-shuffle block reduction for the
++# energy/gradient sums in gpu_calc_energrad (replaces both the atomic and the tensor-core path).
++ifeq ($(SHFLREDUCE), ON)
++ifeq ($(TENSOR), ON)
++$(error SHFLREDUCE=ON and TENSOR=ON are alternative reductions; choose one)
++endif
++	SHFLRED=-DUSE_SHFL_REDUCE
++endif
++
+ CUDA_TARGETS=$(foreach target,$(TARGETS),-gencode arch=compute_$(target),code=sm_$(target))
+ 
+ ifeq ($(DEVICE), CPU)
+@@ -186,7 +195,7 @@ TOOL_CFLAGS+=-DVERSION=\"$(GIT_VERSION)\"
+ # ------------------------------------------------------
+ 
+ kernels: $(KERNEL_SRC)
+-	$(NVCC) $(NWI) $(REP) $(CUDA_FLAGS) $(IFLAGS) $(CUDA_INCLUDES) $(NVTENSOR) -c $(KRNL_DIR)/kernels.cu
++	$(NVCC) $(NWI) $(REP) $(CUDA_FLAGS) $(IFLAGS) $(CUDA_INCLUDES) $(NVTENSOR) $(SHFLRED) -c $(KRNL_DIR)/kernels.cu
+ 
+ otool:
+ 	@echo "Building" $(TOOL_TARGET) "..."
+diff --git a/cuda/calcMergeEneGra.cu b/cuda/calcMergeEneGra.cu
+index c814b43..2f8e6a4 100644
+--- a/cuda/calcMergeEneGra.cu
++++ b/cuda/calcMergeEneGra.cu
+@@ -28,6 +28,8 @@ endorsed by Scripps Research): intramolecular-gradient accumulation onto atom1 u
+ shared-memory atomic per run of equal atom IDs within a warp (segmented warp reduction)
+ instead of one atomic per pair. Integer (fixed-point) gradients make the result identical.
+ Build with -DINTRA_ATOMICS_LEGACY to restore the original per-pair atomics.
++Modified by Lu Verissimo, 2026-11-04: optional deterministic warp-shuffle block reduction
++(USE_SHFL_REDUCE, make SHFLREDUCE=ON) for the energy/torque and translation-gradient sums.
+ */
+ 
+ 
+@@ -104,6 +106,53 @@ __device__ __forceinline__ void intra_segmented_atomic_sub(
+ }
+ #endif
+ 
++#ifdef USE_SHFL_REDUCE
++// [Lu Verissimo 2026-11-04] Block-wide sum of four floats; every thread receives the result.
++// 1) xor-butterfly inside each warp (fixed order, all lanes get the warp sum),
++// 2) lane 0 of each warp stores its four sums in `partial`, one barrier,
++// 3) every thread adds the per-warp partials in warp order 0..n-1 itself (fixed order, so the
++//    result is bit-identical across threads and across runs; no second barrier).
++// `partial` must hold 4 * (blockDim.x / warp width) floats and must not be shared with another
++// call site that can run before every thread has read it (each call site gets its own buffer;
++// the barriers of the following call sites protect reuse in the next evaluation).
++// Requires blockDim.x to be a multiple of the warp width (NUMWI >= 32).
++#define SHFL_FULL_MASK 0xffffffffu
++__device__ __forceinline__ void block_reduce4_shfl(
++                                                   float& a,
++                                                   float& b,
++                                                   float& c,
++                                                   float& d,
++                                                   float* partial
++                                                  )
++{
++	for (uint32_t off = (cData.warpmask + 1) >> 1; off > 0; off >>= 1)
++	{
++		a += __shfl_xor_sync(SHFL_FULL_MASK, a, off);
++		b += __shfl_xor_sync(SHFL_FULL_MASK, b, off);
++		c += __shfl_xor_sync(SHFL_FULL_MASK, c, off);
++		d += __shfl_xor_sync(SHFL_FULL_MASK, d, off);
++	}
++	const uint32_t warp = threadIdx.x >> cData.warpbits;
++	if ((threadIdx.x & cData.warpmask) == 0)
++	{
++		partial[4*warp]     = a;
++		partial[4*warp + 1] = b;
++		partial[4*warp + 2] = c;
++		partial[4*warp + 3] = d;
++	}
++	__syncthreads();
++	const uint32_t nwarps = blockDim.x >> cData.warpbits;
++	a = partial[0]; b = partial[1]; c = partial[2]; d = partial[3];
++	for (uint32_t w = 1; w < nwarps; w++)
++	{
++		a += partial[4*w];
++		b += partial[4*w + 1];
++		c += partial[4*w + 2];
++		d += partial[4*w + 3];
++	}
++}
++#endif
++
+ __device__ void gpu_calc_energrad(
+                                   float*  genotype,
+                                   float&  global_energy,
+@@ -725,7 +774,11 @@ __device__ void gpu_calc_energrad(
+ 		torque_rot.z += tr.z;
+ 	}
+ 
+-#ifdef USE_NVTENSOR
++#if defined(USE_SHFL_REDUCE)
++	// [Lu Verissimo 2026-11-04] deterministic shuffle reduction (see block_reduce4_shfl)
++	__shared__ float shfl_partial_torque_energy[4*NUM_OF_THREADS_PER_BLOCK/32];
++	block_reduce4_shfl(torque_rot.x, torque_rot.y, torque_rot.z, energy, shfl_partial_torque_energy);
++#elif defined(USE_NVTENSOR)
+ 	/* Begin: Reduction using tensor units */
+ 
+ 	// Implementation based on M.Sc. thesis by Gabin Schieffer at KTH:
+@@ -769,7 +822,14 @@ __device__ void gpu_calc_energrad(
+ 	REDUCEFLOATSUM(intraE, pFloatAccumulator);
+ #endif
+ 
+-#ifdef USE_NVTENSOR
++#if defined(USE_SHFL_REDUCE)
++	{
++		// [Lu Verissimo 2026-11-04] own buffer: must not alias the first call site's partials
++		__shared__ float shfl_partial_translation[4*NUM_OF_THREADS_PER_BLOCK/32];
++		float unused = 0.0f;
++		block_reduce4_shfl(gx, gy, gz, unused, shfl_partial_translation);
++	}
++#elif defined(USE_NVTENSOR)
+ 	/* Begin: Reduction using tensor units */
+ 
+ 	// Implementation based on M.Sc. thesis by Gabin Schieffer at KTH:

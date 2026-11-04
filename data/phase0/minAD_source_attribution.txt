@@ -1,0 +1,271 @@
+# Source attribution of gpu_gradient_minAD_kernel (TENSOR=ON reference), from Phase 0 ncu reports
+# Inputs: Phase 0 ncu folder: *_source_cuda_sass.csv and *_source_sass.csv
+# (exported offline with Nsight Compute 2026.3.1 from the .ncu-repz captured on A100-SXM4-40GB GPU 0).
+# Commands: scripts/ncu_line_attr.py <csv>; scripts/ncu_regions.py <csv>; scripts/ncu_sass_top.py <sass csv>
+
+######## 7cpa TENSOR=ON: ncu_line_attr.py
+instructions(2 launches): 5206  totals: {'stall': '9,303,095', 'barrier': '3,310,941', 'shx': '13,582,501,074', 'gx': '4,508,402,494', 'long_sb': '1,031,874', 'mio': '1,035,114'}
+
+=== by source line: shared excessive wavefronts  (total 13,582,501,074)
+   44.8%  device_atomic_functions.hpp:107  return __iAtomicAdd(address, val);
+   13.9%  calcMergeEneGra.cu:588  ATOMICSUBI32(&gradient[atom1_id].x, priv_intra_gradient_x);
+   13.9%  calcMergeEneGra.cu:589  ATOMICSUBI32(&gradient[atom1_id].y, priv_intra_gradient_y);
+   13.9%  calcMergeEneGra.cu:590  ATOMICSUBI32(&gradient[atom1_id].z, priv_intra_gradient_z);
+    2.7%  tcec.hpp:139  const auto v = ptr[mem_offset];
+    2.7%  tcec.hpp:205  ptr[mem_offset] = (frag.sub_frag[bm + frag.num_sub_frag_m * bn].x[frag_index] + 
+    0.9%  calcMergeEneGra.cu:592  ATOMICADDI32(&gradient[atom2_id].x, priv_intra_gradient_x);
+    0.9%  calcMergeEneGra.cu:593  ATOMICADDI32(&gradient[atom2_id].y, priv_intra_gradient_y);
+    0.9%  calcMergeEneGra.cu:594  ATOMICADDI32(&gradient[atom2_id].z, priv_intra_gradient_z);
+    0.4%  kernels.cu:165  for(uint i = 0; i < 8; i++) Q_square[k + i] = ((i + kk) & 3) ? 0.0f : 1.0f;
+  top instructions with project context (before -> after):
+    27.8% ATOMS.ADD RZ, [R23], R10           @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:588 -> calcMergeEneGra.cu:589
+    27.8% ATOMS.ADD RZ, [R23+0x4], R14       @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:589 -> calcMergeEneGra.cu:590
+    27.8% ATOMS.ADD RZ, [R23+0x8], R18       @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:590 -> calcMergeEneGra.cu:431
+     1.9% ATOMS.ADD RZ, [R17], R2            @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:590 -> calcMergeEneGra.cu:431
+     1.9% ATOMS.ADD RZ, [R17+0x4], R4        @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:590 -> calcMergeEneGra.cu:431
+     1.9% ATOMS.ADD RZ, [R17+0x8], R8        @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:590 -> calcMergeEneGra.cu:431
+
+=== by source line: barrier stall  (total 3,310,941)
+   23.5%  calcMergeEneGra.cu:132  rotation_counter < cData.dockpars.rotbondlist_length;
+   15.2%  calcMergeEneGra.cu:664  torque_rot.x = data_to_be_reduced[0];
+   14.7%  kernels.cu:174  __syncthreads();
+   12.8%  calcMergeEneGra.cu:431  contributor_counter < cData.dockpars.num_of_intraE_contributors;
+    9.5%  calcMergeEneGra.cu:597  __syncthreads();
+    6.8%  calcMergeEneGra.cu:935  __syncthreads();
+    5.6%  calcMergeEneGra.cu:870  __syncthreads();
+    3.0%  kernel_ad.cu:313  iteration_cnt = iteration_cnt + 1;
+    2.1%  kernels.cu:132  if (threadIdx.x <= 31) { // Only one warp performs reduction
+    2.0%  kernel_ad.cu:356  } while ((iteration_cnt < cData.dockpars.max_num_of_iters)  && (rho > 0.01f));
+  top instructions with project context (before -> after):
+    21.4% @!P1  BRA 0x79ef3f281ad0           @calcMergeEneGra.cu:132  ctx calcMergeEneGra.cu:132 -> calcMergeEneGra.cu:132
+    15.2% LDS.128 R40, [0x2100]              @calcMergeEneGra.cu:664  ctx calcMergeEneGra.cu:664 -> calcMergeEneGra.cu:664
+    14.7% BSSY B0, 0x79ef3f286ed0            @kernels.cu:174  ctx kernels.cu:174 -> kernels.cu:174
+    12.8% @P0   BRA 0x79ef3f283b60           @calcMergeEneGra.cu:431  ctx calcMergeEneGra.cu:431 -> calcMergeEneGra.cu:431
+     9.5% BSSY B0, 0x79ef3f283e70            @calcMergeEneGra.cu:597  ctx calcMergeEneGra.cu:597 -> calcMergeEneGra.cu:597
+     6.8% BSSY B0, 0x79ef3f288460            @calcMergeEneGra.cu:935  ctx calcMergeEneGra.cu:935 -> calcMergeEneGra.cu:935
+
+=== by source line: all stall samples  (total 9,303,095)
+    8.9%  calcMergeEneGra.cu:132  rotation_counter < cData.dockpars.rotbondlist_length;
+    5.7%  calcMergeEneGra.cu:664  torque_rot.x = data_to_be_reduced[0];
+    5.4%  kernels.cu:174  __syncthreads();
+    4.7%  calcMergeEneGra.cu:431  contributor_counter < cData.dockpars.num_of_intraE_contributors;
+    3.4%  calcMergeEneGra.cu:597  __syncthreads();
+    3.3%  calcMergeEneGra.cu:453  uint32_t atom1_typeid = cData.pKerconst_interintra->atom_types_const[atom1_id];
+    2.6%  calcMergeEneGra.cu:935  __syncthreads();
+    2.4%  device_atomic_functions.hpp:107  return __iAtomicAdd(address, val);
+    2.2%  calcMergeEneGra.cu:137  if ((rotation_list_element & RLIST_DUMMY_MASK) == 0) // If not dummy rotation
+    2.1%  calcMergeEneGra.cu:880  if (rotable_atom_cnt >= cData.pMem_num_rotating_atoms_per_rotbond_const[rotbond_
+  top instructions with project context (before -> after):
+     8.0% @!P1  BRA 0x79ef3f281ad0           @calcMergeEneGra.cu:132  ctx calcMergeEneGra.cu:132 -> calcMergeEneGra.cu:132
+     5.5% LDS.128 R40, [0x2100]              @calcMergeEneGra.cu:664  ctx calcMergeEneGra.cu:664 -> calcMergeEneGra.cu:664
+     5.2% BSSY B0, 0x79ef3f286ed0            @kernels.cu:174  ctx kernels.cu:174 -> kernels.cu:174
+     4.6% @P0   BRA 0x79ef3f283b60           @calcMergeEneGra.cu:431  ctx calcMergeEneGra.cu:431 -> calcMergeEneGra.cu:431
+     3.4% BSSY B0, 0x79ef3f283e70            @calcMergeEneGra.cu:597  ctx calcMergeEneGra.cu:597 -> calcMergeEneGra.cu:597
+     2.9% IMAD.WIDE.U32 R8, R23, 0x4, R12    @calcMergeEneGra.cu:453  ctx calcMergeEneGra.cu:453 -> calcMergeEneGra.cu:453
+
+=== by source line: global excessive sectors  (total 4,508,402,494)
+    7.8%  calcMergeEneGra.cu:439  uint32_t atom1_id = cData.pKerconst_intracontrib->intraE_contributors_const[2*co
+    7.8%  calcMergeEneGra.cu:440  uint32_t atom2_id = cData.pKerconst_intracontrib->intraE_contributors_const[2*co
+    4.5%  calcMergeEneGra.cu:902  uint lig_atom_id = cData.pMem_rotbonds_atoms_const[MAX_NUM_OF_ATOMS*rotbond_id +
+    3.0%  calcMergeEneGra.cu:270  cube[0] = *(grid_value_000+mul_tmp+0);
+    3.0%  calcMergeEneGra.cu:271  cube[1] = *(grid_value_000+mul_tmp+1);
+    3.0%  calcMergeEneGra.cu:272  cube[2] = *(grid_value_000+mul_tmp+2);
+    3.0%  calcMergeEneGra.cu:273  cube[3] = *(grid_value_000+mul_tmp+3);
+    3.0%  calcMergeEneGra.cu:274  cube[4] = *(grid_value_000+mul_tmp+4);
+    3.0%  calcMergeEneGra.cu:275  cube[5] = *(grid_value_000+mul_tmp+5);
+    3.0%  calcMergeEneGra.cu:276  cube[6] = *(grid_value_000+mul_tmp+6);
+  top instructions with project context (before -> after):
+     7.8% LDG.E R23, [R18.64]                @calcMergeEneGra.cu:439  ctx calcMergeEneGra.cu:439 -> calcMergeEneGra.cu:439
+     7.8% LDG.E R17, [R24.64]                @calcMergeEneGra.cu:440  ctx calcMergeEneGra.cu:440 -> calcMergeEneGra.cu:440
+     4.5% LDG.E R14, [R14.64]                @calcMergeEneGra.cu:902  ctx calcMergeEneGra.cu:902 -> calcMergeEneGra.cu:902
+     3.0% LDG.E R27, [R18.64]                @calcMergeEneGra.cu:270  ctx calcMergeEneGra.cu:270 -> calcMergeEneGra.cu:270
+     3.0% LDG.E R30, [R18.64+0x4]            @calcMergeEneGra.cu:271  ctx calcMergeEneGra.cu:271 -> calcMergeEneGra.cu:271
+     3.0% LDG.E R24, [R18.64+0x8]            @calcMergeEneGra.cu:272  ctx calcMergeEneGra.cu:272 -> calcMergeEneGra.cu:272
+
+######## 7cpa TENSOR=ON: ncu_regions.py
+unique addresses: 2064  stall samples 4,279,481  barrier 1,632,261
+   37.3% of stalls   22.3% of barrier   intramolecular pair loop (CMEG 416-598)
+   18.2% of stalls   16.7% of barrier   torque/rotbond gradients (CMEG >=720)
+   16.5% of stalls   23.5% of barrier   rotations (CMEG 128-191)
+    9.2% of stalls   16.8% of barrier   tensor reduction (kernels.cu/tcec)
+    6.9% of stalls   15.2% of barrier   reductions (CMEG 599-719)
+    4.3% of stalls    0.0% of barrier   intermolecular / grid interp (CMEG 192-415)
+    3.5% of stalls    5.5% of barrier   ADADELTA loop (kernel_ad.cu)
+    1.7% of stalls    0.0% of barrier   setup/init (CMEG <128)
+    1.3% of stalls    0.0% of barrier   other: cmath
+    0.7% of stalls    0.0% of barrier   other: calcenergy.cu
+    0.2% of stalls    0.0% of barrier   other: sm_30_intrinsics.hpp
+    0.0% of stalls    0.0% of barrier   other: auxiliary_genetic.cu
+
+######## 3ce3 TENSOR=ON: ncu_line_attr.py
+instructions(2 launches): 5206  totals: {'stall': '1,693,742', 'barrier': '725,967', 'shx': '2,202,809,920', 'gx': '700,569,167', 'long_sb': '126,087', 'mio': '122,580'}
+
+=== by source line: shared excessive wavefronts  (total 2,202,809,920)
+   42.9%  device_atomic_functions.hpp:107  return __iAtomicAdd(address, val);
+   13.0%  calcMergeEneGra.cu:588  ATOMICSUBI32(&gradient[atom1_id].x, priv_intra_gradient_x);
+   13.0%  calcMergeEneGra.cu:589  ATOMICSUBI32(&gradient[atom1_id].y, priv_intra_gradient_y);
+   13.0%  calcMergeEneGra.cu:590  ATOMICSUBI32(&gradient[atom1_id].z, priv_intra_gradient_z);
+    4.7%  tcec.hpp:139  const auto v = ptr[mem_offset];
+    4.7%  tcec.hpp:205  ptr[mem_offset] = (frag.sub_frag[bm + frag.num_sub_frag_m * bn].x[frag_index] + 
+    1.0%  calcMergeEneGra.cu:592  ATOMICADDI32(&gradient[atom2_id].x, priv_intra_gradient_x);
+    1.0%  calcMergeEneGra.cu:593  ATOMICADDI32(&gradient[atom2_id].y, priv_intra_gradient_y);
+    1.0%  calcMergeEneGra.cu:594  ATOMICADDI32(&gradient[atom2_id].z, priv_intra_gradient_z);
+    0.8%  calcMergeEneGra.cu:932  ATOMICADDI32(&gradient_genotype[rotbond_id+6], lrintf(fminf(MAXTERM, fmaxf(-MAXT
+  top instructions with project context (before -> after):
+    26.0% ATOMS.ADD RZ, [R23], R10           @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:588 -> calcMergeEneGra.cu:589
+    26.0% ATOMS.ADD RZ, [R23+0x4], R14       @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:589 -> calcMergeEneGra.cu:590
+    26.0% ATOMS.ADD RZ, [R23+0x8], R18       @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:590 -> calcMergeEneGra.cu:431
+     2.1% ATOMS.ADD RZ, [R17], R2            @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:590 -> calcMergeEneGra.cu:431
+     2.1% ATOMS.ADD RZ, [R17+0x4], R4        @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:590 -> calcMergeEneGra.cu:431
+     2.1% ATOMS.ADD RZ, [R17+0x8], R8        @device_atomic_functions.hpp:107  ctx calcMergeEneGra.cu:590 -> calcMergeEneGra.cu:431
+
+=== by source line: barrier stall  (total 725,967)
+   18.1%  calcMergeEneGra.cu:664  torque_rot.x = data_to_be_reduced[0];
+   17.8%  kernels.cu:174  __syncthreads();
+   14.9%  calcMergeEneGra.cu:132  rotation_counter < cData.dockpars.rotbondlist_length;
+   14.6%  calcMergeEneGra.cu:431  contributor_counter < cData.dockpars.num_of_intraE_contributors;
+    8.8%  calcMergeEneGra.cu:597  __syncthreads();
+    7.1%  calcMergeEneGra.cu:870  __syncthreads();
+    5.1%  calcMergeEneGra.cu:935  __syncthreads();
+    3.2%  kernel_ad.cu:313  iteration_cnt = iteration_cnt + 1;
+    2.4%  kernels.cu:132  if (threadIdx.x <= 31) { // Only one warp performs reduction
+    2.3%  kernel_ad.cu:356  } while ((iteration_cnt < cData.dockpars.max_num_of_iters)  && (rho > 0.01f));
+  top instructions with project context (before -> after):
+    18.1% LDS.128 R40, [0x2100]              @calcMergeEneGra.cu:664  ctx calcMergeEneGra.cu:664 -> calcMergeEneGra.cu:664
+    17.8% BSSY B0, 0x78563d286ed0            @kernels.cu:174  ctx kernels.cu:174 -> kernels.cu:174
+    14.6% @P0   BRA 0x78563d283b60           @calcMergeEneGra.cu:431  ctx calcMergeEneGra.cu:431 -> calcMergeEneGra.cu:431
+    13.1% @!P1  BRA 0x78563d281ad0           @calcMergeEneGra.cu:132  ctx calcMergeEneGra.cu:132 -> calcMergeEneGra.cu:132
+     8.8% BSSY B0, 0x78563d283e70            @calcMergeEneGra.cu:597  ctx calcMergeEneGra.cu:597 -> calcMergeEneGra.cu:597
+     7.1% ULDC UR7, c[0x3][0xc]              @calcMergeEneGra.cu:870  ctx calcMergeEneGra.cu:870 -> calcMergeEneGra.cu:870
+
+=== by source line: all stall samples  (total 1,693,742)
+    8.1%  calcMergeEneGra.cu:664  torque_rot.x = data_to_be_reduced[0];
+    7.8%  kernels.cu:174  __syncthreads();
+    7.0%  calcMergeEneGra.cu:132  rotation_counter < cData.dockpars.rotbondlist_length;
+    6.5%  calcMergeEneGra.cu:431  contributor_counter < cData.dockpars.num_of_intraE_contributors;
+    3.9%  calcMergeEneGra.cu:597  __syncthreads();
+    3.2%  calcMergeEneGra.cu:870  __syncthreads();
+    2.5%  calcMergeEneGra.cu:453  uint32_t atom1_typeid = cData.pKerconst_interintra->atom_types_const[atom1_id];
+    2.4%  calcMergeEneGra.cu:935  __syncthreads();
+    1.7%  device_atomic_functions.hpp:107  return __iAtomicAdd(address, val);
+    1.6%  cmath:1287  { return __builtin_copysignf(__x, __y); }
+  top instructions with project context (before -> after):
+     7.8% LDS.128 R40, [0x2100]              @calcMergeEneGra.cu:664  ctx calcMergeEneGra.cu:664 -> calcMergeEneGra.cu:664
+     7.6% BSSY B0, 0x78563d286ed0            @kernels.cu:174  ctx kernels.cu:174 -> kernels.cu:174
+     6.4% @P0   BRA 0x78563d283b60           @calcMergeEneGra.cu:431  ctx calcMergeEneGra.cu:431 -> calcMergeEneGra.cu:431
+     5.9% @!P1  BRA 0x78563d281ad0           @calcMergeEneGra.cu:132  ctx calcMergeEneGra.cu:132 -> calcMergeEneGra.cu:132
+     3.8% BSSY B0, 0x78563d283e70            @calcMergeEneGra.cu:597  ctx calcMergeEneGra.cu:597 -> calcMergeEneGra.cu:597
+     3.1% ULDC UR7, c[0x3][0xc]              @calcMergeEneGra.cu:870  ctx calcMergeEneGra.cu:870 -> calcMergeEneGra.cu:870
+
+=== by source line: global excessive sectors  (total 700,569,167)
+    9.1%  calcMergeEneGra.cu:439  uint32_t atom1_id = cData.pKerconst_intracontrib->intraE_contributors_const[2*co
+    9.1%  calcMergeEneGra.cu:440  uint32_t atom2_id = cData.pKerconst_intracontrib->intraE_contributors_const[2*co
+    3.1%  calcMergeEneGra.cu:270  cube[0] = *(grid_value_000+mul_tmp+0);
+    3.1%  calcMergeEneGra.cu:271  cube[1] = *(grid_value_000+mul_tmp+1);
+    3.1%  calcMergeEneGra.cu:272  cube[2] = *(grid_value_000+mul_tmp+2);
+    3.1%  calcMergeEneGra.cu:273  cube[3] = *(grid_value_000+mul_tmp+3);
+    3.1%  calcMergeEneGra.cu:274  cube[4] = *(grid_value_000+mul_tmp+4);
+    3.1%  calcMergeEneGra.cu:275  cube[5] = *(grid_value_000+mul_tmp+5);
+    3.1%  calcMergeEneGra.cu:276  cube[6] = *(grid_value_000+mul_tmp+6);
+    3.1%  calcMergeEneGra.cu:277  cube[7] = *(grid_value_000+mul_tmp+7);
+  top instructions with project context (before -> after):
+     9.1% LDG.E R23, [R18.64]                @calcMergeEneGra.cu:439  ctx calcMergeEneGra.cu:439 -> calcMergeEneGra.cu:439
+     9.1% LDG.E R17, [R24.64]                @calcMergeEneGra.cu:440  ctx calcMergeEneGra.cu:440 -> calcMergeEneGra.cu:440
+     3.1% LDG.E R27, [R18.64]                @calcMergeEneGra.cu:270  ctx calcMergeEneGra.cu:270 -> calcMergeEneGra.cu:270
+     3.1% LDG.E R30, [R18.64+0x4]            @calcMergeEneGra.cu:271  ctx calcMergeEneGra.cu:271 -> calcMergeEneGra.cu:271
+     3.1% LDG.E R24, [R18.64+0x8]            @calcMergeEneGra.cu:272  ctx calcMergeEneGra.cu:272 -> calcMergeEneGra.cu:272
+     3.1% LDG.E R29, [R18.64+0xc]            @calcMergeEneGra.cu:273  ctx calcMergeEneGra.cu:273 -> calcMergeEneGra.cu:273
+
+######## 3ce3 TENSOR=ON: ncu_regions.py
+unique addresses: 2064  stall samples 785,444  barrier 363,723
+   34.7% of stalls   23.4% of barrier   intramolecular pair loop (CMEG 416-598)
+   14.9% of stalls   17.1% of barrier   torque/rotbond gradients (CMEG >=720)
+   13.3% of stalls   20.2% of barrier   tensor reduction (kernels.cu/tcec)
+   12.2% of stalls   14.9% of barrier   rotations (CMEG 128-191)
+    9.9% of stalls   18.1% of barrier   reductions (CMEG 599-719)
+    5.0% of stalls    6.3% of barrier   ADADELTA loop (kernel_ad.cu)
+    4.7% of stalls    0.0% of barrier   intermolecular / grid interp (CMEG 192-415)
+    2.2% of stalls    0.0% of barrier   setup/init (CMEG <128)
+    2.0% of stalls    0.0% of barrier   other: cmath
+    0.7% of stalls    0.0% of barrier   other: calcenergy.cu
+    0.3% of stalls    0.0% of barrier   other: sm_30_intrinsics.hpp
+    0.0% of stalls    0.0% of barrier   other: auxiliary_genetic.cu
+
+######## 7cpa TENSOR=ON: ncu_sass_top.py (SASS view)
+instructions: 4129
+  total Warp Stall Sampling (All Samples): 8,677,674
+  total stall_barrier: 3,310,941
+  total L1 Wavefronts Shared Excessive: 7,288,171,308
+  total L1 Wavefronts Shared: 10,016,156,502
+  total stall_long_sb: 1,031,874
+  total stall_mio: 856,181
+  total stall_wait: 1,077,475
+  total L2 Theoretical Sectors Global Excessive: 4,508,402,494
+
+== by opcode: all stall samples
+  BRA         16.5%
+  BSSY        15.7%
+  LDS         10.6%
+  IMAD         8.5%
+  LDG          8.1%
+  FMUL         6.1%
+   top instructions (all stall samples):
+    0x79ef3f281fa0   4.3%  @!P1  BRA 0x79ef3f281ad0
+    0x79ef3f281fa0   4.2%  @!P1  BRA 0x79ef3f281ad0
+    0x79ef3f2855c0   3.0%  LDS.128 R40, [0x2100]
+    0x79ef3f2855c0   2.9%  LDS.128 R40, [0x2100]
+    0x79ef3f286d70   2.8%  BSSY B0, 0x79ef3f286ed0
+    0x79ef3f286d70   2.8%  BSSY B0, 0x79ef3f286ed0
+    0x79ef3f283090   2.5%  @P0   BRA 0x79ef3f283b60
+    0x79ef3f283090   2.4%  @P0   BRA 0x79ef3f283b60
+
+== by opcode: barrier stall
+  BSSY        38.7%
+  BRA         38.4%
+  LDS         17.2%
+  ULDC         5.6%
+  MOV          0.0%
+  I2F          0.0%
+   top instructions (barrier stall):
+    0x79ef3f281fa0  10.8%  @!P1  BRA 0x79ef3f281ad0
+    0x79ef3f281fa0  10.6%  @!P1  BRA 0x79ef3f281ad0
+    0x79ef3f2855c0   7.7%  LDS.128 R40, [0x2100]
+    0x79ef3f2855c0   7.5%  LDS.128 R40, [0x2100]
+    0x79ef3f286d70   7.4%  BSSY B0, 0x79ef3f286ed0
+    0x79ef3f286d70   7.3%  BSSY B0, 0x79ef3f286ed0
+    0x79ef3f283090   6.5%  @P0   BRA 0x79ef3f283b60
+    0x79ef3f283090   6.3%  @P0   BRA 0x79ef3f283b60
+
+== by opcode: shared excessive wavefronts
+  ATOMS       83.5%
+  LDS          8.9%
+  STS          7.5%
+  MOV          0.0%
+  I2F          0.0%
+  S2R          0.0%
+   top instructions (shared excessive wavefronts):
+    0x79ef3f283ad0  13.1%  ATOMS.ADD RZ, [R23], R10
+    0x79ef3f283af0  13.1%  ATOMS.ADD RZ, [R23+0x4], R14
+    0x79ef3f283b10  13.1%  ATOMS.ADD RZ, [R23+0x8], R18
+    0x79ef3f283ad0  12.8%  ATOMS.ADD RZ, [R23], R10
+    0x79ef3f283af0  12.8%  ATOMS.ADD RZ, [R23+0x4], R14
+    0x79ef3f283b10  12.8%  ATOMS.ADD RZ, [R23+0x8], R18
+    0x79ef3f283b20   0.9%  ATOMS.ADD RZ, [R17], R2
+    0x79ef3f283b30   0.9%  ATOMS.ADD RZ, [R17+0x4], R4
+
+== by opcode: global excessive sectors
+  LDG        100.0%
+  MOV          0.0%
+  I2F          0.0%
+  S2R          0.0%
+  ULDC         0.0%
+  S2UR         0.0%
+   top instructions (global excessive sectors):
+    0x79ef3f283150   3.9%  LDG.E R23, [R18.64]
+    0x79ef3f283160   3.9%  LDG.E R17, [R24.64]
+    0x79ef3f283150   3.8%  LDG.E R23, [R18.64]
+    0x79ef3f283160   3.8%  LDG.E R17, [R24.64]
+    0x79ef3f287f30   2.3%  LDG.E R14, [R14.64]
+    0x79ef3f287f30   2.2%  LDG.E R14, [R14.64]
+    0x79ef3f2823d0   1.5%  LDG.E R27, [R18.64]
+    0x79ef3f2823e0   1.5%  LDG.E R30, [R18.64+0x4]

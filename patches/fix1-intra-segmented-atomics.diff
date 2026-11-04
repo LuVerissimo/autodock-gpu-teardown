@@ -1,0 +1,123 @@
+diff --git a/cuda/calcMergeEneGra.cu b/cuda/calcMergeEneGra.cu
+index 7b19a89..c814b43 100644
+--- a/cuda/calcMergeEneGra.cu
++++ b/cuda/calcMergeEneGra.cu
+@@ -22,6 +22,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ 
+ */
+ 
++/*
++Modified by Lu Verissimo, 2026-11-04 (independent performance study, not affiliated with or
++endorsed by Scripps Research): intramolecular-gradient accumulation onto atom1 uses one
++shared-memory atomic per run of equal atom IDs within a warp (segmented warp reduction)
++instead of one atomic per pair. Integer (fixed-point) gradients make the result identical.
++Build with -DINTRA_ATOMICS_LEGACY to restore the original per-pair atomics.
++*/
++
+ 
+ // IMPORTANT: The following block contains definitions
+ // already made either in energy or gradient calculation files.
+@@ -45,6 +53,57 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ // Currently, this is not a good idea
+ // #define RESTORING_MAP_GRADIENT
+ 
++#if !defined(FLOAT_GRADIENTS) && !defined(REPRO) && !defined(INTRA_ATOMICS_LEGACY)
++#define INTRA_SEGMENTED_ATOMICS
++#endif
++
++#ifdef INTRA_SEGMENTED_ATOMICS
++// [Lu Verissimo 2026-11-04] Segmented warp reduction for the atom1 gradient update.
++// The host builds the intramolecular pair list atom1-major (calcenergy.cpp), and lane i of a
++// warp handles list entry base+i, so pairs sharing atom1 occupy contiguous lanes. Each run of
++// equal keys is summed with a segmented inclusive scan (Hillis-Steele with head flags) and
++// only the last lane of the run issues the atomic. Correct for any key order (repeats that
++// are not contiguous just form separate runs); only the speed depends on contiguity.
++// Values are fixed-point ints, so the sum, and hence the gradient, is identical to the
++// per-pair atomics. Must be called by all lanes of the warp (warp-uniform control flow).
++// Inactive lanes pass key = 0xFFFFFFFF and zero values. Lane/width come from the runtime
++// warp mask, so no warp size is hard-coded; the shuffle mask is the 32-lane CUDA one.
++#define INTRA_FULL_MASK 0xffffffffu
++#define INTRA_NO_ATOM   0xffffffffu
++__device__ __forceinline__ void intra_segmented_atomic_sub(
++                                                           int3*    gradient,
++                                                           uint32_t key,
++                                                           int      vx,
++                                                           int      vy,
++                                                           int      vz
++                                                          )
++{
++	const uint32_t lane  = threadIdx.x & cData.warpmask;
++	const uint32_t width = cData.warpmask + 1;
++	const uint32_t prev  = __shfl_up_sync(INTRA_FULL_MASK, key, 1);
++	int head = (lane == 0) || (prev != key);
++	for (uint32_t off = 1; off < width; off <<= 1)
++	{
++		const int ux = __shfl_up_sync(INTRA_FULL_MASK, vx, off);
++		const int uy = __shfl_up_sync(INTRA_FULL_MASK, vy, off);
++		const int uz = __shfl_up_sync(INTRA_FULL_MASK, vz, off);
++		const int uh = __shfl_up_sync(INTRA_FULL_MASK, head, off);
++		if ((lane >= off) && !head)
++		{
++			vx += ux; vy += uy; vz += uz;
++			head = uh;
++		}
++	}
++	const uint32_t next = __shfl_down_sync(INTRA_FULL_MASK, key, 1);
++	if ((key != INTRA_NO_ATOM) && ((lane == cData.warpmask) || (next != key)))
++	{
++		ATOMICSUBI32(&gradient[key].x, vx);
++		ATOMICSUBI32(&gradient[key].y, vy);
++		ATOMICSUBI32(&gradient[key].z, vz);
++	}
++}
++#endif
++
+ __device__ void gpu_calc_energrad(
+                                   float*  genotype,
+                                   float&  global_energy,
+@@ -426,6 +485,19 @@ __device__ void gpu_calc_energrad(
+ #ifdef REPRO
+ 	// Simplest way to ensure random order of atomic addition doesn't make answers irreproducible: use only 1 thread
+ 	if (threadIdx.x==0) for (uint32_t contributor_counter = 0; contributor_counter < cData.dockpars.num_of_intraE_contributors; contributor_counter+= 1) {
++#elif defined(INTRA_SEGMENTED_ATOMICS)
++	// [Lu Verissimo 2026-11-04] Warp-uniform trip count (a warp iterates while its first lane
++	// has work) so every lane reaches the warp shuffles; lanes past the end skip the body.
++	// Each lane still processes exactly the same pairs as before.
++	const uint32_t intra_lane = threadIdx.x & cData.warpmask;
++	for (uint32_t contributor_counter = threadIdx.x;
++	              (contributor_counter - intra_lane) < cData.dockpars.num_of_intraE_contributors;
++	              contributor_counter+= blockDim.x) {
++		int      seg_gx    = 0;
++		int      seg_gy    = 0;
++		int      seg_gz    = 0;
++		uint32_t seg_atom1 = INTRA_NO_ATOM;
++		if (contributor_counter < cData.dockpars.num_of_intraE_contributors) {
+ #else 
+ 	for (uint32_t contributor_counter = threadIdx.x;
+ 	              contributor_counter < cData.dockpars.num_of_intraE_contributors;
+@@ -584,14 +656,25 @@ __device__ void gpu_calc_energrad(
+ 		ATOMICADDF32(&gradient[atom2_id].x, priv_intra_gradient_x);
+ 		ATOMICADDF32(&gradient[atom2_id].y, priv_intra_gradient_y);
+ 		ATOMICADDF32(&gradient[atom2_id].z, priv_intra_gradient_z);
++#else
++#ifdef INTRA_SEGMENTED_ATOMICS
++		seg_gx    = priv_intra_gradient_x;
++		seg_gy    = priv_intra_gradient_y;
++		seg_gz    = priv_intra_gradient_z;
++		seg_atom1 = atom1_id;
+ #else
+ 		ATOMICSUBI32(&gradient[atom1_id].x, priv_intra_gradient_x);
+ 		ATOMICSUBI32(&gradient[atom1_id].y, priv_intra_gradient_y);
+ 		ATOMICSUBI32(&gradient[atom1_id].z, priv_intra_gradient_z);
++#endif
+ 
+ 		ATOMICADDI32(&gradient[atom2_id].x, priv_intra_gradient_x);
+ 		ATOMICADDI32(&gradient[atom2_id].y, priv_intra_gradient_y);
+ 		ATOMICADDI32(&gradient[atom2_id].z, priv_intra_gradient_z);
++#endif
++#ifdef INTRA_SEGMENTED_ATOMICS
++		} // end: contributor_counter < num_of_intraE_contributors
++		intra_segmented_atomic_sub(gradient, seg_atom1, seg_gx, seg_gy, seg_gz);
+ #endif
+ 	} // End contributor_counter for-loop (INTRAMOLECULAR ENERGY)
+ 	__syncthreads();

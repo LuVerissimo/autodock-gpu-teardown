@@ -1,0 +1,90 @@
+# per run
+run	job_s	best_kcal	top_cluster_size	ref_rmsd_A
+1stp_cuda_s42_r1	1.0	-8.34	100	0.43
+1stp_cuda_s42_r2	1.003	-8.34	100	0.43
+1stp_cuda_s42_r3	0.994	-8.34	100	0.43
+1stp_cuda_s42_r4	1.002	-8.34	99	0.43
+1stp_cuda_s42_r5	1.015	-8.34	100	0.43
+1stp_cuda_tensor_s42_r1	0.87	-8.32	99	0.42
+1stp_cuda_tensor_s42_r2	0.771	-8.32	99	0.42
+1stp_cuda_tensor_s42_r3	0.773	-8.32	99	0.42
+1stp_cuda_tensor_s42_r4	0.772	-8.32	99	0.42
+1stp_cuda_tensor_s42_r5	0.765	-8.32	99	0.42
+1stp_ocl_s42_r1	3.698	-8.31	100	0.5
+1stp_ocl_s42_r2	0.79	-8.36	98	0.37
+1stp_ocl_s42_r3	0.83	-8.36	100	0.44
+1stp_ocl_s42_r4	0.814	-8.26	99	0.43
+1stp_ocl_s42_r5	0.82	-8.34	99	0.39
+3ce3_cuda_s42_r1	1.36	-11.55	95	0.91
+3ce3_cuda_s42_r2	1.359	-11.55	94	0.91
+3ce3_cuda_s42_r3	1.36	-11.55	96	0.91
+3ce3_cuda_s42_r4	1.365	-11.55	94	0.91
+3ce3_cuda_s42_r5	1.355	-11.55	96	0.91
+3ce3_cuda_tensor_s42_r1	1.24	-11.56	95	0.94
+3ce3_cuda_tensor_s42_r2	1.26	-11.56	95	0.94
+3ce3_cuda_tensor_s42_r3	1.237	-11.56	95	0.94
+3ce3_cuda_tensor_s42_r4	1.235	-11.56	95	0.94
+3ce3_cuda_tensor_s42_r5	1.245	-11.56	95	0.94
+3ce3_ocl_s42_r1	1.236	-11.55	95	0.92
+3ce3_ocl_s42_r2	1.227	-11.56	93	0.94
+3ce3_ocl_s42_r3	1.234	-11.55	94	0.93
+3ce3_ocl_s42_r4	1.156	-11.54	92	0.94
+3ce3_ocl_s42_r5	1.242	-11.54	96	0.94
+3tmn_cuda_s42_r1	1.038	-9.25	88	0.97
+3tmn_cuda_s42_r2	1.043	-9.25	88	0.97
+3tmn_cuda_s42_r3	1.04	-9.22	87	1.02
+3tmn_cuda_s42_r4	1.05	-9.24	87	0.97
+3tmn_cuda_s42_r5	1.03	-9.25	87	0.97
+3tmn_cuda_tensor_s42_r1	0.904	-9.25	88	1.0
+3tmn_cuda_tensor_s42_r2	0.912	-9.25	88	1.0
+3tmn_cuda_tensor_s42_r3	0.907	-9.25	88	1.0
+3tmn_cuda_tensor_s42_r4	0.92	-9.25	88	1.0
+3tmn_cuda_tensor_s42_r5	0.906	-9.25	88	1.0
+3tmn_ocl_s42_r1	0.898	-9.23	83	0.95
+3tmn_ocl_s42_r2	0.902	-9.22	88	0.98
+3tmn_ocl_s42_r3	0.898	-9.23	89	0.95
+3tmn_ocl_s42_r4	0.897	-9.23	90	1.07
+3tmn_ocl_s42_r5	0.894	-9.22	87	0.95
+7cpa_cuda_s42_r1	7.295	-14.03	6	1.02
+7cpa_cuda_s42_r2	9.097	-13.96	4	0.59
+7cpa_cuda_s42_r3	9.009	-14.02	3	1.84
+7cpa_cuda_s42_r4	8.993	-13.83	3	0.64
+7cpa_cuda_s42_r5	9.042	-13.98	2	0.88
+7cpa_cuda_tensor_s42_r1	7.184	-14.08	1	2.27
+7cpa_cuda_tensor_s42_r2	7.163	-14.08	1	2.27
+7cpa_cuda_tensor_s42_r3	7.168	-14.08	1	2.27
+7cpa_cuda_tensor_s42_r4	7.161	-14.08	1	2.27
+7cpa_cuda_tensor_s42_r5	7.159	-14.08	1	2.27
+7cpa_ocl_s42_r1	7.311	-14.07	1	1.73
+7cpa_ocl_s42_r2	7.326	-14.04	1	0.62
+7cpa_ocl_s42_r3	7.288	-14.36	5	1.07
+7cpa_ocl_s42_r4	7.34	-13.49	6	1.07
+7cpa_ocl_s42_r5	7.224	-14.05	3	1.74
+
+# per case and build
+case	build	n	job_s_median	job_s_min	job_s_max	best_kcal_distinct	ref_rmsd_min..max
+1stp	cuda	5	1.002	0.994	1.015	[-8.34]	0.43..0.43
+1stp	cuda_tensor	5	0.772	0.765	0.870	[-8.32]	0.42..0.42
+1stp	ocl	5	0.820	0.790	3.698	[-8.36, -8.34, -8.31, -8.26]	0.37..0.50
+3ce3	cuda	5	1.360	1.355	1.365	[-11.55]	0.91..0.91
+3ce3	cuda_tensor	5	1.240	1.235	1.260	[-11.56]	0.94..0.94
+3ce3	ocl	5	1.234	1.156	1.242	[-11.56, -11.55, -11.54]	0.92..0.94
+3tmn	cuda	5	1.040	1.030	1.050	[-9.25, -9.24, -9.22]	0.97..1.02
+3tmn	cuda_tensor	5	0.907	0.904	0.920	[-9.25]	1.00..1.00
+3tmn	ocl	5	0.898	0.894	0.902	[-9.23, -9.22]	0.95..1.07
+7cpa	cuda	5	9.009	7.295	9.097	[-14.03, -14.02, -13.98, -13.96, -13.83]	0.59..1.84
+7cpa	cuda_tensor	5	7.163	7.159	7.184	[-14.08]	2.27..2.27
+7cpa	ocl	5	7.311	7.224	7.340	[-14.36, -14.07, -14.05, -14.04, -13.49]	0.62..1.74
+
+# default vs TENSOR=ON (ratio = median default / median tensor; >1 means TENSOR=ON faster)
+case	default_s	tensor_s	ratio	reference_build	reference_s
+1stp	1.002	0.772	1.298	cuda_tensor	0.772
+3ce3	1.360	1.240	1.097	cuda_tensor	1.240
+3tmn	1.040	0.907	1.147	cuda_tensor	0.907
+7cpa	9.009	7.163	1.258	cuda_tensor	7.163
+
+# OpenCL vs faster CUDA build (ratio = ocl / reference; >1 means CUDA faster)
+1stp	ocl_s=0.820	ref_s=0.772	ratio=1.062
+3ce3	ocl_s=1.234	ref_s=1.240	ratio=0.995
+3tmn	ocl_s=0.898	ref_s=0.907	ratio=0.990
+7cpa	ocl_s=7.311	ref_s=7.163	ratio=1.021

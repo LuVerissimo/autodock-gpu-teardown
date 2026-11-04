@@ -1,0 +1,36 @@
+## 1stp cuda
+ time_%   total_ms launches     avg_us  kernel
+  97.20     511.26       47    10877.8  gpu_gradient_minAD_kernel
+   1.50       8.04       47      171.1  gpu_gen_and_eval_newpops_kernel
+   1.20       6.52       48      135.9  gpu_sum_evals_kernel
+   0.00       0.14        1      136.9  gpu_calc_initpop_kernel
+## 1stp cuda_tensor
+ time_%   total_ms launches     avg_us  kernel
+  96.20     309.97       35     8856.2  gpu_gradient_minAD_kernel
+   2.10       6.88       35      196.6  gpu_gen_and_eval_newpops_kernel
+   1.60       5.14       36      142.7  gpu_sum_evals_kernel
+   0.00       0.14        1      136.3  gpu_calc_initpop_kernel
+## 3ce3 cuda
+ time_%   total_ms launches     avg_us  kernel
+  98.00     699.26       35    19978.8  gpu_gradient_minAD_kernel
+   1.30       8.93       35      255.1  gpu_gen_and_eval_newpops_kernel
+   0.70       5.24       36      145.6  gpu_sum_evals_kernel
+   0.00       0.21        1      208.3  gpu_calc_initpop_kernel
+## 3ce3 cuda_tensor
+ time_%   total_ms launches     avg_us  kernel
+  97.30     584.45       40    14611.4  gpu_gradient_minAD_kernel
+   1.70      10.49       40      262.3  gpu_gen_and_eval_newpops_kernel
+   0.90       5.59       41      136.2  gpu_sum_evals_kernel
+   0.00       0.21        1      208.4  gpu_calc_initpop_kernel
+## 7cpa cuda
+ time_%   total_ms launches     avg_us  kernel
+  99.50    8131.98       88    92408.9  gpu_gradient_minAD_kernel
+   0.40      29.64       88      336.9  gpu_gen_and_eval_newpops_kernel
+   0.20      12.94       89      145.3  gpu_sum_evals_kernel
+   0.00       0.32        1      324.0  gpu_calc_initpop_kernel
+## 7cpa cuda_tensor
+ time_%   total_ms launches     avg_us  kernel
+  99.30    6194.11       87    71196.7  gpu_gradient_minAD_kernel
+   0.50      29.33       87      337.1  gpu_gen_and_eval_newpops_kernel
+   0.20      12.51       88      142.1  gpu_sum_evals_kernel
+   0.00       0.33        1      325.7  gpu_calc_initpop_kernel

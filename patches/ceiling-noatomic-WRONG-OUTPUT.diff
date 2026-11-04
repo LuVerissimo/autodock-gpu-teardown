@@ -1,0 +1,41 @@
+diff --git a/cuda/calcMergeEneGra.cu b/cuda/calcMergeEneGra.cu
+index 7b19a89..8ccccff 100644
+--- a/cuda/calcMergeEneGra.cu
++++ b/cuda/calcMergeEneGra.cu
+@@ -22,6 +22,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ 
+ */
+ 
++/*
++Modified by Lu Verissimo, 2026-11-04 (independent performance study, not affiliated with or
++endorsed by Scripps Research): THROWAWAY timing-ceiling variant, intramolecular gradient
++atomics replaced by racy plain updates. Output is incorrect by design.
++*/
++
+ 
+ // IMPORTANT: The following block contains definitions
+ // already made either in energy or gradient calculation files.
+@@ -585,13 +591,16 @@ __device__ void gpu_calc_energrad(
+ 		ATOMICADDF32(&gradient[atom2_id].y, priv_intra_gradient_y);
+ 		ATOMICADDF32(&gradient[atom2_id].z, priv_intra_gradient_z);
+ #else
+-		ATOMICSUBI32(&gradient[atom1_id].x, priv_intra_gradient_x);
+-		ATOMICSUBI32(&gradient[atom1_id].y, priv_intra_gradient_y);
+-		ATOMICSUBI32(&gradient[atom1_id].z, priv_intra_gradient_z);
+-
+-		ATOMICADDI32(&gradient[atom2_id].x, priv_intra_gradient_x);
+-		ATOMICADDI32(&gradient[atom2_id].y, priv_intra_gradient_y);
+-		ATOMICADDI32(&gradient[atom2_id].z, priv_intra_gradient_z);
++		// [Lu Verissimo 2026-11-04] THROWAWAY CEILING VARIANT - PRODUCES WRONG RESULTS.
++		// Plain (racy, non-atomic) updates replace the per-pair shared atomics, to time an
++		// upper bound for any fix to this loop. Never use its docking output.
++		gradient[atom1_id].x -= priv_intra_gradient_x;
++		gradient[atom1_id].y -= priv_intra_gradient_y;
++		gradient[atom1_id].z -= priv_intra_gradient_z;
++
++		gradient[atom2_id].x += priv_intra_gradient_x;
++		gradient[atom2_id].y += priv_intra_gradient_y;
++		gradient[atom2_id].z += priv_intra_gradient_z;
+ #endif
+ 	} // End contributor_counter for-loop (INTRAMOLECULAR ENERGY)
+ 	__syncthreads();

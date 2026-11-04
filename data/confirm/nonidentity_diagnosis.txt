@@ -1,0 +1,52 @@
+
+=== baseline repeatability: base_tensor a vs b
+DIFFERENT  1stp_base_tensor_s42_r1.dlg vs 1stp_base_tensor_s42_r1.dlg: 36 differing lines, line counts 6844/6844
+DIFFERENT  7cpa_base_tensor_s123_r1.dlg vs 7cpa_base_tensor_s123_r1.dlg: 58 differing lines, line counts 12718/12718
+SUMMARY: 10/12 identical, 2 different, 0 unpaired
+
+=== fix #1 repeatability: fix1_tensor a vs b
+DIFFERENT  1stp_fix1_tensor_s42_r1.dlg vs 1stp_fix1_tensor_s42_r1.dlg: 29 differing lines, line counts 6844/6844
+SUMMARY: 11/12 identical, 1 different, 0 unpaired
+
+=== gate repeat: base_tensor vs fix1_tensor
+DIFFERENT  1stp_base_tensor_s123_r1.dlg vs 1stp_fix1_tensor_s123_r1.dlg: 129 differing lines, line counts 6844/6844
+DIFFERENT  1stp_base_tensor_s42_r1.dlg vs 1stp_fix1_tensor_s42_r1.dlg: 117 differing lines, line counts 6844/6844
+DIFFERENT  1stp_base_tensor_s7_r1.dlg vs 1stp_fix1_tensor_s7_r1.dlg: 183 differing lines, line counts 6844/6844
+DIFFERENT  3ce3_base_tensor_s123_r1.dlg vs 3ce3_fix1_tensor_s123_r1.dlg: 603 differing lines, line counts 8864/8864
+DIFFERENT  3ce3_base_tensor_s42_r1.dlg vs 3ce3_fix1_tensor_s42_r1.dlg: 732 differing lines, line counts 8864/8864
+DIFFERENT  3ce3_base_tensor_s7_r1.dlg vs 3ce3_fix1_tensor_s7_r1.dlg: 495 differing lines, line counts 8864/8864
+DIFFERENT  3tmn_base_tensor_s123_r1.dlg vs 3tmn_fix1_tensor_s123_r1.dlg: 53 differing lines, line counts 6240/6240
+DIFFERENT  3tmn_base_tensor_s42_r1.dlg vs 3tmn_fix1_tensor_s42_r1.dlg: 159 differing lines, line counts 6242/6242
+DIFFERENT  3tmn_base_tensor_s7_r1.dlg vs 3tmn_fix1_tensor_s7_r1.dlg: 181 differing lines, line counts 6240/6240
+DIFFERENT  7cpa_base_tensor_s123_r1.dlg vs 7cpa_fix1_tensor_s123_r1.dlg: 5130 differing lines, line counts 12718/12721
+DIFFERENT  7cpa_base_tensor_s42_r1.dlg vs 7cpa_fix1_tensor_s42_r1.dlg: 5128 differing lines, line counts 12718/12721
+DIFFERENT  7cpa_base_tensor_s7_r1.dlg vs 7cpa_fix1_tensor_s7_r1.dlg: 5124 differing lines, line counts 12721/12717
+SUMMARY: 0/12 identical, 12 different, 0 unpaired
+
+=== control: base_tensor vs fix1 branch + INTRA_ATOMICS_LEGACY
+DIFFERENT  1stp_base_tensor_s42_r1.dlg vs 1stp_fix1_legacy_tensor_s42_r1.dlg: 36 differing lines, line counts 6844/6844
+SUMMARY: 11/12 identical, 1 different, 0 unpaired
+
+=== race-free path: fix2only_shfl vs fix12_shfl (differ only by fix #1)
+DIFFERENT  1stp_fix2only_shfl_s123_r1.dlg vs 1stp_fix12_shfl_s123_r1.dlg: 40 differing lines, line counts 6846/6846
+DIFFERENT  1stp_fix2only_shfl_s42_r1.dlg vs 1stp_fix12_shfl_s42_r1.dlg: 195 differing lines, line counts 6844/6844
+DIFFERENT  1stp_fix2only_shfl_s7_r1.dlg vs 1stp_fix12_shfl_s7_r1.dlg: 200 differing lines, line counts 6843/6843
+DIFFERENT  3ce3_fix2only_shfl_s123_r1.dlg vs 3ce3_fix12_shfl_s123_r1.dlg: 458 differing lines, line counts 8864/8864
+DIFFERENT  3ce3_fix2only_shfl_s42_r1.dlg vs 3ce3_fix12_shfl_s42_r1.dlg: 534 differing lines, line counts 8864/8864
+DIFFERENT  3ce3_fix2only_shfl_s7_r1.dlg vs 3ce3_fix12_shfl_s7_r1.dlg: 684 differing lines, line counts 8864/8864
+DIFFERENT  3tmn_fix2only_shfl_s123_r1.dlg vs 3tmn_fix12_shfl_s123_r1.dlg: 134 differing lines, line counts 6240/6240
+DIFFERENT  3tmn_fix2only_shfl_s42_r1.dlg vs 3tmn_fix12_shfl_s42_r1.dlg: 125 differing lines, line counts 6240/6240
+DIFFERENT  3tmn_fix2only_shfl_s7_r1.dlg vs 3tmn_fix12_shfl_s7_r1.dlg: 86 differing lines, line counts 6243/6243
+DIFFERENT  7cpa_fix2only_shfl_s123_r1.dlg vs 7cpa_fix12_shfl_s123_r1.dlg: 5123 differing lines, line counts 12721/12720
+DIFFERENT  7cpa_fix2only_shfl_s42_r1.dlg vs 7cpa_fix12_shfl_s42_r1.dlg: 5132 differing lines, line counts 12722/12721
+DIFFERENT  7cpa_fix2only_shfl_s7_r1.dlg vs 7cpa_fix12_shfl_s7_r1.dlg: 5134 differing lines, line counts 12720/12722
+SUMMARY: 0/12 identical, 12 different, 0 unpaired
+
+=== repeatability: fix12_shfl a vs b
+DIFFERENT  1stp_fix12_shfl_s123_r1.dlg vs 1stp_fix12_shfl_s123_r1.dlg: 50 differing lines, line counts 6846/6846
+DIFFERENT  1stp_fix12_shfl_s42_r1.dlg vs 1stp_fix12_shfl_s42_r1.dlg: 40 differing lines, line counts 6844/6844
+SUMMARY: 10/12 identical, 2 different, 0 unpaired
+
+=== repeatability: fix2only_shfl a vs b
+DIFFERENT  1stp_fix2only_shfl_s42_r1.dlg vs 1stp_fix2only_shfl_s42_r1.dlg: 39 differing lines, line counts 6844/6844
+SUMMARY: 11/12 identical, 1 different, 0 unpaired

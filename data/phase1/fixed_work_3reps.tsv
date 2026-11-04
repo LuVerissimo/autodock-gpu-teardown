@@ -1,0 +1,107 @@
+# per run
+run	job_s	best_kcal	top_cluster_size	ref_rmsd_A
+1stp_base_tensor_s42_r1	4.816	-8.37	100	0.41
+1stp_base_tensor_s42_r2	4.727	-8.37	100	0.41
+1stp_base_tensor_s42_r3	4.713	-8.37	100	0.41
+1stp_ceiling_tensor_s42_r1	4.708	-8.38	100	0.37
+1stp_ceiling_tensor_s42_r2	4.688	-8.39	100	0.38
+1stp_ceiling_tensor_s42_r3	4.715	-8.38	100	0.39
+1stp_fix12_shfl_s42_r1	4.202	-8.38	100	0.41
+1stp_fix12_shfl_s42_r2	4.271	-8.38	100	0.41
+1stp_fix12_shfl_s42_r3	4.216	-8.38	100	0.41
+1stp_fix1_tensor_s42_r1	4.955	-8.38	100	0.37
+1stp_fix1_tensor_s42_r2	5.026	-8.38	100	0.37
+1stp_fix1_tensor_s42_r3	4.939	-8.38	100	0.37
+1stp_fix2only_shfl_s42_r1	3.997	-8.38	100	0.38
+1stp_fix2only_shfl_s42_r2	4.047	-8.38	100	0.38
+1stp_fix2only_shfl_s42_r3	4.01	-8.38	100	0.38
+3ce3_base_tensor_s42_r1	6.956	-11.57	100	0.94
+3ce3_base_tensor_s42_r2	7.007	-11.57	100	0.94
+3ce3_base_tensor_s42_r3	6.979	-11.57	100	0.94
+3ce3_ceiling_tensor_s42_r1	5.968	-11.58	98	0.95
+3ce3_ceiling_tensor_s42_r2	5.951	-11.57	99	0.95
+3ce3_ceiling_tensor_s42_r3	5.961	-11.58	99	0.95
+3ce3_fix12_shfl_s42_r1	6.291	-11.56	100	0.95
+3ce3_fix12_shfl_s42_r2	6.256	-11.56	100	0.95
+3ce3_fix12_shfl_s42_r3	6.246	-11.56	100	0.95
+3ce3_fix1_tensor_s42_r1	7.007	-11.56	100	0.96
+3ce3_fix1_tensor_s42_r2	7.007	-11.56	100	0.96
+3ce3_fix1_tensor_s42_r3	6.993	-11.56	100	0.96
+3ce3_fix2only_shfl_s42_r1	6.4	-11.56	100	0.94
+3ce3_fix2only_shfl_s42_r2	6.351	-11.56	100	0.94
+3ce3_fix2only_shfl_s42_r3	6.361	-11.56	100	0.94
+3tmn_base_tensor_s42_r1	3.954	-9.19	97	0.79
+3tmn_base_tensor_s42_r2	3.952	-9.19	97	0.79
+3tmn_base_tensor_s42_r3	3.965	-9.19	97	0.79
+3tmn_ceiling_tensor_s42_r1	3.889	-9.2	97	0.81
+3tmn_ceiling_tensor_s42_r2	3.887	-9.19	100	0.8
+3tmn_ceiling_tensor_s42_r3	3.847	-9.21	98	0.84
+3tmn_fix12_shfl_s42_r1	3.629	-9.19	99	0.8
+3tmn_fix12_shfl_s42_r2	3.637	-9.19	99	0.8
+3tmn_fix12_shfl_s42_r3	3.625	-9.19	99	0.8
+3tmn_fix1_tensor_s42_r1	4.228	-9.18	99	0.79
+3tmn_fix1_tensor_s42_r2	4.211	-9.18	99	0.79
+3tmn_fix1_tensor_s42_r3	4.229	-9.18	99	0.79
+3tmn_fix2only_shfl_s42_r1	3.394	-9.19	99	0.8
+3tmn_fix2only_shfl_s42_r2	3.387	-9.19	99	0.8
+3tmn_fix2only_shfl_s42_r3	3.391	-9.19	99	0.8
+7cpa_base_tensor_s42_r1	10.228	-14.1	1	2.28
+7cpa_base_tensor_s42_r2	10.181	-14.1	1	2.28
+7cpa_base_tensor_s42_r3	10.194	-14.1	1	2.28
+7cpa_ceiling_tensor_s42_r1	8.787	-14.5	7	1.05
+7cpa_ceiling_tensor_s42_r2	8.8	-14.08	10	0.91
+7cpa_ceiling_tensor_s42_r3	8.809	-14.69	13	1.08
+7cpa_fix12_shfl_s42_r1	8.905	-13.74	2	0.64
+7cpa_fix12_shfl_s42_r2	8.894	-13.74	2	0.64
+7cpa_fix12_shfl_s42_r3	8.928	-13.74	2	0.64
+7cpa_fix1_tensor_s42_r1	9.615	-13.91	1	0.66
+7cpa_fix1_tensor_s42_r2	9.62	-13.91	1	0.66
+7cpa_fix1_tensor_s42_r3	9.634	-13.91	1	0.66
+7cpa_fix2only_shfl_s42_r1	9.793	-13.79	2	2.28
+7cpa_fix2only_shfl_s42_r2	9.773	-13.79	2	2.28
+7cpa_fix2only_shfl_s42_r3	9.751	-13.79	2	2.28
+
+# per case and build
+case	build	n	job_s_median	job_s_min	job_s_max	best_kcal_distinct	ref_rmsd_min..max
+1stp	base_tensor	3	4.727	4.713	4.816	[-8.37]	0.41..0.41
+1stp	ceiling_tensor	3	4.708	4.688	4.715	[-8.39, -8.38]	0.37..0.39
+1stp	fix12_shfl	3	4.216	4.202	4.271	[-8.38]	0.41..0.41
+1stp	fix1_tensor	3	4.955	4.939	5.026	[-8.38]	0.37..0.37
+1stp	fix2only_shfl	3	4.010	3.997	4.047	[-8.38]	0.38..0.38
+3ce3	base_tensor	3	6.979	6.956	7.007	[-11.57]	0.94..0.94
+3ce3	ceiling_tensor	3	5.961	5.951	5.968	[-11.58, -11.57]	0.95..0.95
+3ce3	fix12_shfl	3	6.256	6.246	6.291	[-11.56]	0.95..0.95
+3ce3	fix1_tensor	3	7.007	6.993	7.007	[-11.56]	0.96..0.96
+3ce3	fix2only_shfl	3	6.361	6.351	6.400	[-11.56]	0.94..0.94
+3tmn	base_tensor	3	3.954	3.952	3.965	[-9.19]	0.79..0.79
+3tmn	ceiling_tensor	3	3.887	3.847	3.889	[-9.21, -9.2, -9.19]	0.80..0.84
+3tmn	fix12_shfl	3	3.629	3.625	3.637	[-9.19]	0.80..0.80
+3tmn	fix1_tensor	3	4.228	4.211	4.229	[-9.18]	0.79..0.79
+3tmn	fix2only_shfl	3	3.391	3.387	3.394	[-9.19]	0.80..0.80
+7cpa	base_tensor	3	10.194	10.181	10.228	[-14.1]	2.28..2.28
+7cpa	ceiling_tensor	3	8.800	8.787	8.809	[-14.69, -14.5, -14.08]	0.91..1.08
+7cpa	fix12_shfl	3	8.905	8.894	8.928	[-13.74]	0.64..0.64
+7cpa	fix1_tensor	3	9.620	9.615	9.634	[-13.91]	0.66..0.66
+7cpa	fix2only_shfl	3	9.773	9.751	9.793	[-13.79]	2.28..2.28
+
+# default vs TENSOR=ON (ratio = median default / median tensor; >1 means TENSOR=ON faster)
+case	default_s	tensor_s	ratio	reference_build	reference_s
+
+# speedup vs base_tensor (median over reps; >1 = faster than base_tensor)
+case	build	job_s	ref_job_s	wall_speedup	evals_median	gens_median	s_per_Meval	ref_s_per_Meval	per_eval_speedup
+1stp	ceiling_tensor	4.708	4.727	1.004	3003026	571	1.5686	1.5742	1.004
+1stp	fix12_shfl	4.216	4.727	1.121	3005020	568	1.4030	1.5742	1.122
+1stp	fix1_tensor	4.955	4.727	0.954	3003828	566	1.6496	1.5742	0.954
+1stp	fix2only_shfl	4.010	4.727	1.179	3003770	567	1.3350	1.5742	1.179
+3ce3	ceiling_tensor	5.961	6.979	1.171	3005194	300	1.9836	2.3201	1.170
+3ce3	fix12_shfl	6.256	6.979	1.116	3001414	296	2.0844	2.3201	1.113
+3ce3	fix1_tensor	7.007	6.979	0.996	3008142	296	2.3293	2.3201	0.996
+3ce3	fix2only_shfl	6.361	6.979	1.097	3002776	296	2.1184	2.3201	1.095
+3tmn	ceiling_tensor	3.887	3.954	1.017	3009605	156	1.2900	1.3108	1.016
+3tmn	fix12_shfl	3.629	3.954	1.090	3002924	142	1.2085	1.3108	1.085
+3tmn	fix1_tensor	4.228	3.954	0.935	3011920	143	1.4038	1.3108	0.934
+3tmn	fix2only_shfl	3.391	3.954	1.166	3019892	144	1.1229	1.3108	1.167
+7cpa	ceiling_tensor	8.800	10.194	1.158	3002745	377	2.9318	3.3902	1.156
+7cpa	fix12_shfl	8.905	10.194	1.145	3001214	128	2.9671	3.3902	1.143
+7cpa	fix1_tensor	9.620	10.194	1.060	3011660	128	3.1943	3.3902	1.061
+7cpa	fix2only_shfl	9.773	10.194	1.043	3021314	129	3.2347	3.3902	1.048
