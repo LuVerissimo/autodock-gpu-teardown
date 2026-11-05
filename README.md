@@ -79,14 +79,15 @@ Fixed work = `--autostop 0 --heuristics 0 --nev 3000000`. 10 interleaved repetit
 ratio of medians, with a percentile bootstrap CI.
 
 **A method lesson: time the ceiling.** The profile pointed at the pair-loop atomics as the dominant waste: about
-78% of excess shared-memory traffic. Alongside the fixes, we built a ceiling variant that removes those atomics
-entirely and gives wrong results. It was only 1.153x faster in wall time, and 1.189x on the kernel. The biggest
-line in the profile was worth roughly 19% of kernel time, and the correct fixes recovered most of it (1.139x of
-1.153x wall).
+78% of excess shared-memory traffic. Alongside the fixes, I built a ceiling variant that removes those atomics
+entirely and gives wrong results. It was only 1.153x faster in wall time and 1.189x on the kernel, so the biggest
+line in the profile was worth at most about 16% of kernel time and 13% of wall time. Fix #1, which targets those
+atomics, recovered about 42% of that wall-time ceiling (1.059x). Fix #2 attacks a different cost, the tensor-core
+reduction, and together they reached 1.139x. A dominant counter is not the same as a dominant cost.
 
-A dominant counter is not the same as a dominant cost. Because the ceiling was built at the same time as the fixes,
-not before them, its answer arrived only once the engineering was done. Timing a deliberately wrong upper bound
-first, before investing in a fix, would have set expectations earlier, at the cost of about one build and one run.
+Because the ceiling was built at the same time as the fixes, not before them, its answer arrived only once the
+engineering was done. Timing a deliberately wrong upper bound first, before investing in a fix, would have set
+expectations earlier, at the cost of about one build and one run.
 
 **It depends on the ligand.**
 - On the smaller shipped ligands (fixed work), fix #1 alone is 0.93-1.00x, i.e. no faster or slower. Fix #2 alone
