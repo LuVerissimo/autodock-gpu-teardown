@@ -1,12 +1,12 @@
 base_tensor memcheck: ========= ERROR SUMMARY: 0 errors
 base_tensor racecheck: ========= RACECHECK SUMMARY: 6 hazards displayed (1 error, 5 warnings)
-base_tensor initcheck: ========= ERROR SUMMARY: 2080 errors were not printed. Use --print-limit option to adjust the number of printed errors
+base_tensor initcheck: ========= ERROR SUMMARY: 2100 errors
 base_tensor synccheck: ========= ERROR SUMMARY: 0 errors
 fix1_tensor memcheck: ========= ERROR SUMMARY: 0 errors
 fix1_tensor racecheck: ========= RACECHECK SUMMARY: 6 hazards displayed (1 error, 5 warnings)
-fix1_tensor initcheck: ========= ERROR SUMMARY: 2080 errors were not printed. Use --print-limit option to adjust the number of printed errors
+fix1_tensor initcheck: ========= ERROR SUMMARY: 2100 errors
 fix1_tensor synccheck: ========= ERROR SUMMARY: 0 errors
 fix12_shfl memcheck: ========= ERROR SUMMARY: 0 errors
 fix12_shfl racecheck: ========= RACECHECK SUMMARY: 0 hazards displayed (0 errors, 0 warnings)
-fix12_shfl initcheck: ========= ERROR SUMMARY: 2080 errors were not printed. Use --print-limit option to adjust the number of printed errors
+fix12_shfl initcheck: ========= ERROR SUMMARY: 2100 errors
 fix12_shfl synccheck: ========= ERROR SUMMARY: 0 errors

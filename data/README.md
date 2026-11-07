@@ -17,7 +17,7 @@ session.
 | `phase1/set42_base_vs_fix1.tsv` | 42-complex set, TENSOR=ON vs fix #1, 1 rep |
 | `phase1/seed_distributions_equivalence.txt` | pre-registered equivalence test over seeds (calibration and verdicts) |
 | `phase1/gate_byte_identity.txt` | byte comparison of .dlg outputs, fix #1 vs baseline, and repeatability |
-| `phase1/compute_sanitizer_summary.txt` | memcheck/racecheck/initcheck/synccheck summaries |
+| `phase1/compute_sanitizer_summary.txt` | memcheck/racecheck/initcheck/synccheck summaries (initcheck totals corrected 2026-11-07, see `../CORRECTIONS.md`) |
 | `confirm/fixed_work_7cpa_wall_ci.tsv` | headline: 10 reps, wall time per evaluation, bootstrap CI |
 | `confirm/fixed_work_7cpa_minAD_ci.tsv` | 10 reps, minAD kernel time per evaluation, bootstrap CI |
 | `confirm/nonidentity_diagnosis.txt` | where fix #1's non-identity comes from |
